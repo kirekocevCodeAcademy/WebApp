@@ -1,0 +1,40 @@
+﻿@page
+@model MultipleAppSetup.Pages.BeautyShop.Membership.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Memeberships</h1>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Membership Type</th>
+                <th>Discount Service</th>
+                <th>Discount Product</th>
+            </tr>
+        </thead>
+        @foreach (var membership in Model.Memberships)
+        {
+            <tr>
+                <td>
+                    @membership.GetMembershipType()
+                </td>
+                <td>
+                    @membership.DiscountService().ToString("P")
+                </td>
+                <td>
+                    @membership.DiscountProducts().ToString("P")
+                </td>
+            </tr>
+        }
+        <tfoot style="visibility:@(!Model.Memberships.Any() ? "visible" : "hidden")">
+            <tr>
+                <td colspan="3">
+                    Nothing to display.
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+

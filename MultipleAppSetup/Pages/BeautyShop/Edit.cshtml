@@ -1,0 +1,49 @@
+﻿@page
+@model MultipleAppSetup.Pages.BeautyShop.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>New Visit</h2>
+<form method="post">
+    <input type="hidden" asp-for="Visit.Id" />
+    <div class="form-row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Visit.CustomerId"></label>
+            <select class="form-control" asp-for="Visit.CustomerId" asp-items="@Model.Customers">
+                <option value="">Pick a Customer</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Visit.CustomerId"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-sm-5">
+            <label>Product Price</label>
+            <input class="form-control" name="ProductPrice" type="number" />
+        </div>
+        <div class="form-group col-sm-5">
+            <label>Service Price</label>
+            <input class="form-control" name="ServicePrice" type="number" />
+        </div>
+        <div class="form-group col-sm-2 d-flex">
+            <button type="submit" class="btn btn-secondary align-self-end" asp-page-handler="Buy">Buy</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" asp-page-handler="">Save</button>
+    </div>
+    @for (int i = 0; i < Model.Visit.Products.Count; i++)
+    {
+        <input type="hidden" asp-for="@Model.Visit.Products[i]" />
+    }
+    @for (int i = 0; i < Model.Visit.Services.Count; i++)
+    {
+        <input type="hidden" asp-for="@Model.Visit.Services[i]" />
+    }
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+

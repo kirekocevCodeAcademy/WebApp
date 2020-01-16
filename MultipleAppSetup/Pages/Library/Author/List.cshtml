@@ -1,0 +1,63 @@
+﻿@page
+@model MultipleAppSetup.Pages.Library.Author.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Authors</h1>
+<div>
+    <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="search" asp-for="SearchTerm">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var author in Model.Authors)
+        {
+            <tr>
+                <td>
+                    @author.FirstName
+                </td>
+                <td>
+                    @author.LastName
+                </td>
+                <td>
+                    <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@author.Id">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        <tfoot style="visibility:@(!Model.Authors.Any() ? "visible" : "hidden")">
+            <tr>
+                <td colspan="3">
+                    Nothing to display.
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="form-group">
+    <a class="btn btn-primary" asp-page="./Edit">Add Author</a>
+</div>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
