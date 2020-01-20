@@ -64,12 +64,10 @@ namespace MultipleAppSetup.Pages.BeautyShop
                 if (ProductPrice.HasValue && ProductPrice.Value > 0)
                 {
                     Visit.BuyProduct(ProductPrice.Value);
-                    ProductPrice = 0;
                 }
                 if (ServicePrice.HasValue && ServicePrice.Value > 0)
                 {
                     Visit.BuyService(ServicePrice.Value);
-                    ServicePrice = 0;
                 }
             }
 

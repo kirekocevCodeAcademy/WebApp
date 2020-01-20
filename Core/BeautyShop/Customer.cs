@@ -9,7 +9,7 @@ namespace Core.BeautyShop
         {
             get
             {
-                return Membership != null;
+                return MembershipId.HasValue;
             }
         }
 
