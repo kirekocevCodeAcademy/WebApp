@@ -9,7 +9,8 @@ namespace DomainData.BeautyShop
     {
         Visit Create(Visit visit);
         Visit GetVisitById(int id);
-        
+        Visit GetVisitFullObjById(int id);
+
         int Commit();
         IEnumerable<Visit> GetVisits(string searchTerm = null);
     }

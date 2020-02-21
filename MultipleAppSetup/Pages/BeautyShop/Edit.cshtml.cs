@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using BusinessLayer;
 using DomainData.BeautyShop;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,7 @@ namespace MultipleAppSetup.Pages.BeautyShop
     {
         private readonly IVisitData visitData;
         private readonly ICustomerData customerData;
+        private readonly VisitBl visitBl;
 
         [BindProperty]
         public Core.BeautyShop.Visit Visit{ get; set; }
@@ -20,10 +22,11 @@ namespace MultipleAppSetup.Pages.BeautyShop
        
         public IEnumerable<SelectListItem> Customers { get; set; }
 
-        public EditModel(IVisitData visitData, ICustomerData customerData)
+        public EditModel(IVisitData visitData, ICustomerData customerData, VisitBl visitBl)
         {
             this.visitData = visitData;
             this.customerData = customerData;
+            this.visitBl = visitBl;
         }
 
         public IActionResult OnGet()
@@ -63,15 +66,15 @@ namespace MultipleAppSetup.Pages.BeautyShop
 
                 if (ProductPrice.HasValue && ProductPrice.Value > 0)
                 {
-                    Visit.BuyProduct(ProductPrice.Value);
+                    Visit.ShopItems.Add(visitBl.CreateProduct(ProductPrice.Value));
                 }
                 if (ServicePrice.HasValue && ServicePrice.Value > 0)
                 {
-                    Visit.BuyService(ServicePrice.Value);
+                    Visit.ShopItems.Add(visitBl.CreateService(ServicePrice.Value));
                 }
             }
 
-            Message = Visit.CustomerId == null ? "No customer selected." : $"Total expences: {Visit.TotalExpences()}";
+            Message = Visit.CustomerId == null ? "No customer selected." : $"Total expences: {visitBl.TotalExpences(Visit)}";
             var customers = customerData.GetCustomers().ToList().Select(p => new { Id = p.Id, Display = $"{p.FirstName} {p.LastName}" });
             Customers = new SelectList(customers, "Id", "Display");
             return Page();

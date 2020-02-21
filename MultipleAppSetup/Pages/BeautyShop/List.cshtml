@@ -34,7 +34,7 @@
                     @visit.Customer.FirstName @visit.Customer.LastName
                 </td>
                 <td>
-                    @visit.TotalExpences()
+                    @Model.GetTotalExpenses(visit)
                 </td>
             </tr>
         }
@@ -47,9 +47,9 @@
         </tfoot>
         <tfoot style="visibility:@(Model.Visits.Any() ? "visible" : "hidden")">
             <tr>
-                <td colspan="2">
+                <th colspan="2">
                     Total By Customer:
-                </td>
+                </th>
             </tr>
             @foreach (var item in Model.Visits.GroupBy(x => x.Customer.Id))
             {
@@ -58,7 +58,7 @@
                         @item.First().Customer.FirstName @item.First().Customer.LastName
                     </td>
                     <td>
-                        @item.Sum(x=>x.TotalExpences())
+                        @item.Sum(x=>Model.GetTotalExpenses(x))
                     </td>
                 </tr>
             }

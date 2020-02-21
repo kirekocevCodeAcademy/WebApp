@@ -40,7 +40,7 @@ namespace MultipleAppSetup.Pages.BeautyShop.Customer
                 Customer = new Core.BeautyShop.Customer();
             }
 
-            var memberships = membershipData.GetMemberships().ToList().Select(p => new { Id = p.Id, Display = p.GetMembershipType() });
+            var memberships = membershipData.GetMemberships().ToList().Select(p => new { Id = p.Id, Display = p.MembershipType });
             Memberships = new SelectList(memberships, "Id", "Display");
             return Page();
         }
@@ -49,9 +49,6 @@ namespace MultipleAppSetup.Pages.BeautyShop.Customer
         {
             if (ModelState.IsValid)
             {
-                var membership = membershipData.GetMebershipById(Customer.MembershipId);
-                Customer.Membership = membership;
-
                 if (Customer.Id == 0)
                 {
                     Customer = customerData.Create(Customer);
@@ -67,7 +64,7 @@ namespace MultipleAppSetup.Pages.BeautyShop.Customer
                 return RedirectToPage("./List");
             }
 
-            var memberships = membershipData.GetMemberships().ToList().Select(p => new { Id = p.Id, Display = p.GetMembershipType() });
+            var memberships = membershipData.GetMemberships().ToList().Select(p => new { Id = p.Id, Display = p.MembershipType });
             Memberships = new SelectList(memberships, "Id", "Display");
             return Page();
         }

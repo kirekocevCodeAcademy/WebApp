@@ -35,7 +35,7 @@
                     @customer.FirstName @customer.LastName
                 </td>
                 <td>
-                    @customer.Membership?.GetMembershipType()
+                    @customer.Membership?.MembershipType
                 </td>
                 <td>
                     <a class="btn btn-outline-secondary" asp-page="./Edit" asp-route-id="@customer.Id">

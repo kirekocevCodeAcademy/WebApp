@@ -18,13 +18,13 @@
         {
             <tr>
                 <td>
-                    @membership.GetMembershipType()
+                    @membership.MembershipType
                 </td>
                 <td>
-                    @membership.DiscountService().ToString("P")
+                    @membership.DiscountService.ToString("P")
                 </td>
                 <td>
-                    @membership.DiscountProducts().ToString("P")
+                    @membership.DiscountProducts.ToString("P")
                 </td>
             </tr>
         }

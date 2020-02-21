@@ -31,6 +31,11 @@ namespace DomainData.BeautyShop.InMemoryData
             return visits.SingleOrDefault(p => p.Id == id);
         }
 
+        public Visit GetVisitFullObjById(int id)
+        {
+            return GetVisitById(id);
+        }
+
         public IEnumerable<Visit> GetVisits(string searchTerm = null)
         {
             return visits

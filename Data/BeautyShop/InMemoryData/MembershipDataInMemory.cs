@@ -14,10 +14,10 @@ namespace DomainData.BeautyShop.InMemoryData
         {
             memberships = new List<Membership>
             {
-                new Premium(),
-                new Gold(),
-                new Silver(),
-                new Bronze()
+                new Membership(),
+                new Membership(),
+                new Membership(),
+                new Membership()
             };
         }
 

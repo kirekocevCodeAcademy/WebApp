@@ -1,9 +1,13 @@
+using BusinessLayer;
 using DomainData.BeautyShop;
 using DomainData.BeautyShop.InMemoryData;
+using DomainData.BeautyShop.SqlData;
 using DomainData.Library;
 using DomainData.Library.InMemoryData;
+using DomainData.Library.SqlData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,12 +27,16 @@ namespace MultipleAppSetup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<IBookData, BookDataInMemory>();
-            services.AddSingleton<IPersonData, PersonDataInMemory>();
 
-            services.AddSingleton<ICustomerData, CustomerDataInMemory>();
-            services.AddSingleton<IMembershipData, MembershipDataInMemory>();
-            services.AddSingleton<IVisitData, VisitDataInMemory>();
+            services.AddDbContextPool<LibraryDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LibraryDb")));
+            services.AddScoped<IBookData, BookDataSql>();
+            services.AddScoped<IPersonData, PersonDataSql>();
+
+            services.AddDbContextPool<BeautyShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BeautyShopDb")));
+            services.AddScoped<ICustomerData, CustomerDataSql>();
+            services.AddScoped<IMembershipData, MembershipDataSql>();
+            services.AddScoped<IVisitData, VisitDataSql>();
+            services.AddScoped<VisitBl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

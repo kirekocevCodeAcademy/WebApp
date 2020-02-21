@@ -4,14 +4,15 @@ using System.Text;
 
 namespace Core.BeautyShop
 {
-    public abstract class Membership
+    public class Membership
     {
-        public int Id { get; set; }
-        public abstract string GetMembershipType();
-        public abstract double DiscountService();
-        public virtual double DiscountProducts()
+        public Membership()
         {
-            return 15 / 100.0;
+            DiscountProducts = 15 / 100.0;
         }
+        public int Id { get; set; }
+        public string MembershipType { get; set; }
+        public double DiscountService { get; set; }
+        public double DiscountProducts { get; set; }
     }
 }
