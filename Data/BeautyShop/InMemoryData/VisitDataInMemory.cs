@@ -44,5 +44,12 @@ namespace DomainData.BeautyShop.InMemoryData
                    || r.Customer.LastName.ToLower().StartsWith(searchTerm.ToLower()))
                .OrderBy(r => r.Customer.FirstName);
         }
+
+        public IEnumerable<Visit> GetVisitsByCustomer(int customerId)
+        {
+            return visits
+                .Where(v => v.CustomerId == customerId)
+                .ToList();
+        }
     }
 }

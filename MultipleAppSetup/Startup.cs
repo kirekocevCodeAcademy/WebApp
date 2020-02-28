@@ -1,9 +1,7 @@
 using BusinessLayer;
 using DomainData.BeautyShop;
-using DomainData.BeautyShop.InMemoryData;
 using DomainData.BeautyShop.SqlData;
 using DomainData.Library;
-using DomainData.Library.InMemoryData;
 using DomainData.Library.SqlData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +35,8 @@ namespace MultipleAppSetup
             services.AddScoped<IMembershipData, MembershipDataSql>();
             services.AddScoped<IVisitData, VisitDataSql>();
             services.AddScoped<VisitBl>();
+
+            services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +63,7 @@ namespace MultipleAppSetup
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

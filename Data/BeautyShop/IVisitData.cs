@@ -13,5 +13,7 @@ namespace DomainData.BeautyShop
 
         int Commit();
         IEnumerable<Visit> GetVisits(string searchTerm = null);
+
+        IEnumerable<Visit> GetVisitsByCustomer(int customerId);
     }
 }

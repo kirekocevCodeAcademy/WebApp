@@ -11,6 +11,8 @@ namespace Core.BeautyShop
         public ShopItemType ShopItemType { get; set; }
 
         public int VisitId { get; set; }
+        
         public Visit Visit { get; set; }
+
     }
 }

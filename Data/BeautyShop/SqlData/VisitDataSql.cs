@@ -53,5 +53,16 @@ namespace DomainData.BeautyShop.SqlData
                 .OrderBy(r => r.Customer.FirstName)
                 .ToList();
         }
+
+        public IEnumerable<Visit> GetVisitsByCustomer(int customerId)
+        {
+            return beautyShopDbContext
+                .Visits
+                .Include(v => v.Customer)
+                .ThenInclude(c => c.Membership)
+                .Include(v => v.ShopItems)
+                .Where(v=>v.CustomerId == customerId)
+                .ToList();
+        }
     }
 }
