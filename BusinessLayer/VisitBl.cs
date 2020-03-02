@@ -31,9 +31,12 @@ namespace BusinessLayer
             };
         }
 
-        public double TotalExpences(int visitId)
+        public double? TotalExpences(int visitId)
         {
-            var visit = visitRepository.GetVisitById(visitId);
+            var visit = visitRepository.GetVisitFullObjById(visitId);
+            if (visit == null)
+                return null;
+
             return TotalExpences(visit);
         }
 

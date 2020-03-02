@@ -1,8 +1,5 @@
 ﻿using Core.BeautyShop;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DomainData.BeautyShop
 {
@@ -15,5 +12,6 @@ namespace DomainData.BeautyShop
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Visit> Visits { get; set; }
         public DbSet<Membership> Membership { get; set; }
+        public DbSet<ShopItem> ShopItem { get; set; }
     }
 }

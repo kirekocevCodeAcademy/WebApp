@@ -34,6 +34,7 @@ namespace MultipleAppSetup
             services.AddScoped<ICustomerData, CustomerDataSql>();
             services.AddScoped<IMembershipData, MembershipDataSql>();
             services.AddScoped<IVisitData, VisitDataSql>();
+            services.AddScoped<IShopItemRepository, ShopItemDataSql>();
             services.AddScoped<VisitBl>();
 
             services.AddControllers().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
